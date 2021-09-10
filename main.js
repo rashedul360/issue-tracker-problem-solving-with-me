@@ -21,6 +21,7 @@ function submitIssue(e) {
   document.getElementById("issueInputForm").reset();
   fetchIssues();
   e.preventDefault();
+  location.reload();
 }
 
 const closeIssue = (id) => {
@@ -28,7 +29,7 @@ const closeIssue = (id) => {
   const currentIssue = issues.find((issue) => parseInt(issue.id) === id);
   currentIssue.status = "Closed";
   localStorage.setItem("issues", JSON.stringify(issues));
-  fetchIssues();
+  location.reload();
 };
 
 const deleteIssue = (id) => {
@@ -40,7 +41,6 @@ const deleteIssue = (id) => {
 const fetchIssues = () => {
   const issues = JSON.parse(localStorage.getItem("issues"));
   const issuesList = document.getElementById("issuesList");
-  issuesList.innerHTML = "";
 
   for (var i = 0; i < issues.length; i++) {
     const { id, description, severity, assignedTo, status } = issues[i];
